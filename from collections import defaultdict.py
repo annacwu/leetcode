@@ -15,7 +15,7 @@ class Solution(object):
             bloomList.append(flowerCount)
         return bloomList
 
-        # # most efficient solution: 
+        # most efficient solution: 
         # bloomIntervals = defaultdict(int)
 
         # for start, end, in flowers:
