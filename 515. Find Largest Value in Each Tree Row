@@ -1,0 +1,70 @@
+class Solution(object):
+    def largestValues(self, root):
+        
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+
+        maxes = []
+
+        if not root: 
+            return maxes
+
+        currLevel = [root]
+        while currLevel:
+            levelMax = float('-inf')
+            nextLevel = []
+            for node in currLevel:
+                levelMax = max(levelMax,node.val)
+                if node.left: 
+                    nextLevel.append(node.left)
+                if node.right: 
+                    nextLevel.append(node.right)
+            maxes.append(levelMax)
+            currLevel = nextLevel
+
+        return maxes
+
+        """ attempt 2"""
+        # maxes = []
+        # # def findHeight(node):
+        # #     if node == None:
+        # #         return 0
+        # #     else:
+        # #         left = (findHeight(node.left))
+        # #         right = (findHeight(node.right))
+
+        # #         if left > right: 
+
+        # #             return left + 1
+        # #         else: 
+        # #             return right + 1
+
+        # # height = findHeight(root)
+
+        # # if height == 1:
+        # #     return []
+
+        # def dfs(root):
+        #     if root:
+        #         dfs(root.left)
+        #         dfs(root.right)
+        #         maxes.append(max(root.left, root.right))
+        
+        # return maxes
+
+        """ attempt 1 """
+
+        # Rcurr = root
+        # Lcurr = root
+        # rowCount = 1
+        # vals = [root]
+        # while Rcurr is not None and Lcurr is not None: 
+        #     if Rcurr.val > Lcurr.val:
+
+        #     if Rcurr != None:
+        #         Rcurr = Rcurr.right
+        #     if Lcurr != None:
+        #         Lcurr = cLurr.left
+        #     rowCount += 1
