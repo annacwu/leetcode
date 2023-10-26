@@ -1,0 +1,43 @@
+class Solution(object):
+    def numFactoredBinaryTrees(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: int
+        """
+
+        '''my attempt (close, missing one aspect)'''
+        # count = len(arr)
+
+        # def findKids(arr, num):
+        #     childCount = 0
+        #     for i in arr: 
+        #         if num % i == 0:
+        #             comp = num // i
+        #             if comp in arr: 
+        #                 print(str(num) + ' ' + str(comp))
+        #                 childCount += 1 + findKids(arr, comp)
+        #     return childCount
+
+        # for elem in arr: 
+        #     count += findKids(arr,elem)
+
+        # return count 
+
+        '''solution worked with chatgpt'''
+
+        MOD = 10 ** 9 + 7
+        arr.sort()  # Sort the array in ascending order
+        num_count = len(arr)
+        dp = [1] * num_count  # Initialize DP array with 1
+
+        num_index = {num: i for i, num in enumerate(arr)}
+
+        for i in range(num_count):
+            for j in range(i):
+                if arr[i] % arr[j] == 0:
+                    complement = arr[i] // arr[j]
+                    if complement in num_index:
+                        dp[i] += dp[j] * dp[num_index[complement]]
+                        dp[i] %= MOD
+
+        return sum(dp) % MOD
