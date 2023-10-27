@@ -1,0 +1,73 @@
+class Solution(object):
+    def longestPalindrome(self, s):
+
+        '''accepted chatgpt helped solution'''
+
+        if not s:
+            return ""
+
+        def expandAroundCenter(left, right):
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return s[left + 1:right]
+
+        longest = ""
+        
+        for i in range(len(s)):
+            # Odd length palindrome
+            palindrome1 = expandAroundCenter(i, i)
+            if len(palindrome1) > len(longest):
+                longest = palindrome1
+            
+            # Even length palindrome
+            palindrome2 = expandAroundCenter(i, i + 1)
+            if len(palindrome2) > len(longest):
+                longest = palindrome2
+
+        return longest
+
+    '''my original attempt'''
+
+    # def longestPalindrome(self, s):
+    #     """
+    #     :type s: str
+    #     :rtype: str
+    #     """
+    #     if s == s[::-1]: return s
+    #     maxSub = 0
+    #     finalStr = ''
+    #     def reverse(string):
+    #         newStr = ""
+    #         for i in string:
+    #             newStr = i + newStr
+    #         return newStr
+
+    #     # for i in range(0, len(s)):
+    #     #     print(s[:len(s)-i])
+    #     #     if reverse(s[:len(s)-i]) == s[:len(s)-i]:
+    #     #         return s[:len(s)-i]
+
+    #     # start at first index and append all words that slice off the last index
+    #     # do that for each index
+    #     def combos(string):
+    #         comboslist = []
+    #         i = 0
+    #         while i <= len(string):
+    #             j = 0
+    #             while j <= len(string):
+    #                 splice = string[i:j]
+    #                 if splice != '':
+    #                     comboslist.append(splice)
+    #                 j += 1
+    #             i += 1
+    #         return comboslist
+
+    #     for i in combos(s):
+    #         if reverse(i) == i:
+    #             if len(i) > maxSub:
+    #                 maxSub = len(i)
+    #                 finalStr = i
+
+    #     return finalStr
+        
