@@ -1,0 +1,28 @@
+class Solution(object):
+    def sortByBits(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        ls = []
+        for elem in arr: 
+            num = bin(elem)
+            count = 0
+            string = str(num)
+            for i in string[2:]: 
+                count += int(i)
+            ls.append([count, elem])
+
+        ls.sort()
+        arr = []
+        for elem in ls: 
+            arr.append(elem[1])
+        # print(dp)
+        # dp = sorted(dp.items(), key=lambda x:x[1])
+        # print(dp)
+        # k = 0
+        # for i in dp:
+        #     arr[k] = i[0]
+        #     k += 1
+
+        return arr
