@@ -4,9 +4,29 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        checking = True
+        checked = set()
+        while checking: 
+            check = random.choice(nums)
+            while check in checked: 
+                check = random.choice(nums)
+            
+            count = 0
+            for elem in nums:
+                if check == elem: 
+                    count += 1
 
-        nums.sort()
-        return nums[len(nums)/2]
+            if count > len(nums) / 2:
+                checking = False
+                return check
+            else: 
+                checked.add(check)
+
+        return -1
+            
+
+        # nums.sort()
+        # return nums[len(nums)/2]
 
 
         # checked = set()
